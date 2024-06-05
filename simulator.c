@@ -798,9 +798,7 @@ void analyze(int alg, int preemptive) {
 		turnaround_sum += p->turnaroundTime;
 		response_sum += p->responseTime;
 	}
-	//printf("start time: %d / end time: %d / CPU utilization : %.2lf%% \n",Computation_start, Computation_end,
-	// (double)(Computation_end - Computation_idle)/(Computation_end - Computation_start)*100);
-	
+
 	if(cur_proc_num_T != 0) {
 		printf("Average waiting time: %d\n",wait_sum/cur_proc_num_T);
 		printf("Average turnaround time: %d\n",turnaround_sum/cur_proc_num_T);
@@ -888,49 +886,6 @@ void startSimulation(int alg, int preemptive, int time_quantum, int count) {
     Computation_start = 0;
 	Computation_end = 0;
 	Computation_idle = 0;
-}
-
-void evaluate() {
-	
-	puts ("\n                       <Evaluation>                    \n");
-	int i;
-	for(i=0;i<cur_eval_num;i++) {
-		
-		puts ("===========================================================");
-		
-		int alg = evals[i]->alg;
-		int preemptive = evals[i]->preemptive;
-		
-		switch (evals[i]->alg) {
-		
-		case FCFS:
-            puts("<FCFS Algorithm>");
-            break;
-        case SJF:
-        	if(preemptive) printf("<Preemptive ");
-        	else printf("<Non-preemptive ");
-        	puts("SJF Algorithm>");
-        	break;
-        case RR:
-        	puts("<Round Robin Algorithm>");
-        	break;
-        case PRIORITY:
-        	if(preemptive) printf("<Preemptive ");
-        	else printf("<Non-preemptive ");
-        	puts("Priority Algorithm>");
-        	break;
-        default:
-        return;
-		}
-		puts ("-----------------------------------------------------------");
-		//printf("start time: %d / end time: %d / CPU utilization : %.2lf%% \n",evals[i]->startTime,evals[i]->endTime,evals[i]->CPU_util);
-		printf("Average waiting time: %d\n",evals[i]->avg_waitingTime);
-		printf("Average turnaround time: %d\n",evals[i]->avg_turnaroundTime);
-		//printf("Average response time: %d\n",evals[i]->avg_responseTime);
-		//printf("Completed: %d\n",evals[i]->completed);
-	}
-	
-	puts  ("===========================================================");
 }
 
 
