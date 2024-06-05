@@ -39,7 +39,11 @@ void printGanttChart() {
         for (j = (ganttChart[i].finish_time - ganttChart[i].start_time) / 2; j > 0; j--) {
             printf(" ");
         }
-        printf("P%d", ganttChart[i].pid);
+        if (ganttChart[i].pid == -1) {
+            printf("IDLE");
+        } else {
+            printf("P%d", ganttChart[i].pid);
+        }
         for (j = (ganttChart[i].finish_time - ganttChart[i].start_time) / 2; j > 0; j--) {
             printf(" ");
         }
@@ -702,6 +706,12 @@ void simulate(int amount, int alg, int preemptive, int time_quantum) {
             ganttChart[ganttChartSize].start_time = amount - timeConsumed;
             ganttChart[ganttChartSize].finish_time = amount;
             ganttChartSize++;
+        } else if (Computation_idle > 0) {
+            ganttChart[ganttChartSize].pid = -1;  // Represent idle with pid -1
+            ganttChart[ganttChartSize].start_time = amount - Computation_idle;
+            ganttChart[ganttChartSize].finish_time = amount;
+            ganttChartSize++;
+            Computation_idle = 0;  // Reset idle time
         }
 		timeConsumed = 0;  
 		
