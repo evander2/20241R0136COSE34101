@@ -68,6 +68,16 @@ void printGanttChart() {
     printf("\n");
 }
 
+void cleargantt(){
+    for(int i=0; i<1000; i++){
+        ganttChart[i].pid=0;
+        ganttChart[i].start_time=0;
+        ganttChart[i].finish_time=0;
+    }
+    ganttChartSize=0;
+
+}
+
 //process
 typedef struct myProcess* processPointer;
 typedef struct myProcess {
@@ -854,6 +864,7 @@ void startSimulation(int alg, int preemptive, int time_quantum, int count) {
 	}
 	Computation_end = i-1;
 	printGanttChart();
+    cleargantt();
 	analyze(alg, preemptive);
 
 	
